@@ -1,0 +1,5 @@
+rootProject.name = 'FRCGameSim'
+
+include 'gamesim'
+include 'model'
+include 'setup'
