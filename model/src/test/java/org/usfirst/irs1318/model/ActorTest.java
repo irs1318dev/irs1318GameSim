@@ -10,6 +10,7 @@ public class ActorTest {
     public void builderTest(){
 
         Actor actor = new Actor.Builder()
+
                 .setName("redPlateRedSwitch")
                 .setAlliance(Alliance.RED)
                 .build();
