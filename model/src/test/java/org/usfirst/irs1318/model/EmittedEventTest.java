@@ -14,7 +14,7 @@ public class EmittedEventTest {
                 .setEventName("addCubeEvent")
                 .build();
 
-        assertEquals("cubeAdded", emittedEvent.getEventName());
+        assertEquals("addCubeEvent", emittedEvent.getEventName());
 
     }
 
