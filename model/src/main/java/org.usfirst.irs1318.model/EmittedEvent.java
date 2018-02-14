@@ -1,14 +1,16 @@
 package org.usfirst.irs1318.model;
 
+import com.google.common.collect.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class EmittedEvent {
 
     private final String eventName;
-    private final Map<String,String> properties;
+    private final ImmutableMap<String,String> properties;
 
-    private EmittedEvent(String eventName, Map<String,String> properties){
+    private EmittedEvent(String eventName, ImmutableMap<String,String> properties){
         this.eventName = eventName;
         this.properties = properties;
     }
@@ -19,11 +21,8 @@ public class EmittedEvent {
 
     public static class Builder {
         private String eventName;
-        private Map<String,String> properties;
+        private Map<String,String> properties = new HashMap<>();
 
-        public Builder() {
-            properties = new HashMap<>();
-        }
         public Builder setEventName(String eventName) {
             this.eventName = eventName;
             return this;
@@ -33,7 +32,7 @@ public class EmittedEvent {
             return this;
         }
         public EmittedEvent build() {
-            return new EmittedEvent(eventName, properties);
+            return new EmittedEvent(eventName, ImmutableMap.copyOf(properties));
         }
     }
 }
