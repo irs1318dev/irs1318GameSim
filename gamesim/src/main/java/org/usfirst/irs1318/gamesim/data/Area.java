@@ -6,7 +6,8 @@ import java.util.Objects;
  * Class that represents an immutable area.
  *
  * An area is a {@link Location}, width, and height. It uses
- * the same units as {@link Location}.
+ * the same units as {@link Location}. The location is at
+ * the center of the area.
  */
 public final class Area {
     private final Location location;
@@ -20,7 +21,7 @@ public final class Area {
     }
 
     /**
-     * @return True if an area contains a location (inclusive), false otherwise.
+     * @return True if an area contains a location, false otherwise.
      */
     public boolean contains(Location location) {
         return location.getX() < getRightBound() &&
