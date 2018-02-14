@@ -1,7 +1,7 @@
 package org.usfirst.irs1318.gamesim.data;
 
 /**
- * Class representing an immutable instant in time.
+ * Class that represents an immutable instant in time.
  *
  * One unit of time is equivalent to one second in a game.
  *

@@ -3,7 +3,7 @@ package org.usfirst.irs1318.gamesim.data;
 import java.util.Objects;
 
 /**
- * Class representing an immutable location.
+ * Class that represents an immutable location.
  *
  * A game can be treated as though it were on a graph. The
  * origin is at the bottom left of the arena, and the scale
@@ -12,40 +12,44 @@ import java.util.Objects;
  *
  * Locations may be negative, but this should be avoided if
  * possible.
+ *
+ * Locations should not be compared directly. Instead, they
+ * should be checked to see if they're in an {@link Area}.
  */
 public final class Location {
-    private final int x;
-    private final int y;
+    private final float x;
+    private final float y;
 
-    public Location(int x, int y) {
+    public Location(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * @return This location translated one unit in any {@link Direction}.
+     * Translates a location in any {@link Direction}.
+     * @param distance The distance to translate the location.
      */
-    public Location translate(Direction direction) {
+    public Location translate(Direction direction, float distance) {
         switch (direction) {
-            case LEFT: return new Location(x - 1, y);
-            case RIGHT: return new Location(x + 1, y);
-            case UP: return new Location(x, y + 1);
-            case DOWN: return new Location(x, y - 1);
+            case LEFT: return new Location(x - distance, y);
+            case RIGHT: return new Location(x + distance, y);
+            case UP: return new Location(x, y + distance);
+            case DOWN: return new Location(x, y - distance);
             default: throw new IllegalArgumentException(direction.toString());
         }
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(x) + ", " + Integer.toString(y);
+        return "(" + x + ", " + y + ")";
     }
 
     @Override
