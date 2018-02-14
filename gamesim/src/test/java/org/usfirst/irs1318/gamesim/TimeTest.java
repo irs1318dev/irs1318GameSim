@@ -1,6 +1,7 @@
 package org.usfirst.irs1318.gamesim;
 
 import org.junit.*;
+import org.usfirst.irs1318.gamesim.data.Time;
 
 import java.math.BigInteger;
 

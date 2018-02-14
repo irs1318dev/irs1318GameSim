@@ -1,10 +1,10 @@
-package org.usfirst.irs1318.gamesim;
+package org.usfirst.irs1318.gamesim.data;
 
 import java.math.BigInteger;
 import java.util.Objects;
 
 /**
- * Interface representing an immutable instant in time.
+ * Class representing an immutable instant in time.
  *
  * This class does not expose its internals. This is so that
  * we can change what we use to represent time in the future
