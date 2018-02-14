@@ -1,34 +1,25 @@
 package org.usfirst.irs1318.gamesim.data;
 
-import java.math.BigInteger;
-import java.util.Objects;
-
 /**
  * Class representing an immutable instant in time.
+ *
+ * One unit of time is equivalent to one second in a game.
  *
  * This class does not expose its internals. This is so that
  * we can change what we use to represent time in the future
  * if necessary.
  */
 public final class Time implements Comparable<Time> {
-    private final BigInteger value;
+    private final double value;
 
     /**
-     * @param value A positive long representing the time.
+     * @param value A positive double representing the time.
      * @throws IllegalArgumentException if passed a negative value.
      */
-    public Time(long value) {
-        this(BigInteger.valueOf(value));
-    }
-
-    /**
-     * @param value A positive BigInteger representing the time.
-     * @throws IllegalArgumentException if passed a negative value.
-     */
-    public Time(BigInteger value) {
-        if (value.compareTo(BigInteger.ZERO) < 0)
-            throw new IllegalArgumentException(value.toString());
-        this.value = Objects.requireNonNull(value);
+    public Time(double value) {
+        if (value < 0)
+            throw new IllegalArgumentException(Double.toString(value));
+        this.value = value;
     }
 
     public boolean isBefore(Time time) {
@@ -40,30 +31,30 @@ public final class Time implements Comparable<Time> {
     }
 
     public Time translateFuture(Time time) {
-        return new Time(value.add(time.value));
+        return new Time(value + time.value);
     }
 
     public Time translatePast(Time time) {
-        return new Time(value.subtract(time.value));
+        return new Time(value - time.value);
     }
 
     @Override
     public int compareTo(Time time) {
-        return value.compareTo(time.value);
+        return Double.compare(value, time.value);
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return Double.toString(value);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Time && ((Time) obj).value.equals(value);
+        return obj instanceof Time && ((Time) obj).value == value;
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Double.hashCode(value);
     }
 }
