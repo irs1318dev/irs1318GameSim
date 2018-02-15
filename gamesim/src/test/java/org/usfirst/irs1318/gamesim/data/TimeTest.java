@@ -1,9 +1,6 @@
-package org.usfirst.irs1318.gamesim;
+package org.usfirst.irs1318.gamesim.data;
 
-import org.junit.*;
-import org.usfirst.irs1318.gamesim.data.Time;
-
-import java.math.BigInteger;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -25,23 +22,18 @@ public class TimeTest {
 
     @Test
     public void translatePast() {
-        assertTrue(later.translatePast(later).equals(now));
+        assertEquals(later.translatePast(later), now);
     }
 
     @Test
     public void translateFuture() {
-        assertTrue(now.translateFuture(later).equals(later));
+        assertEquals(now.translateFuture(later), later);
     }
 
     @Test
     public void constructNegativeShouldFail() {
         try {
             new Time(-1);
-            fail();
-        } catch (IllegalArgumentException ignored) { }
-
-        try {
-            new Time(new BigInteger("-1"));
             fail();
         } catch (IllegalArgumentException ignored) { }
     }
