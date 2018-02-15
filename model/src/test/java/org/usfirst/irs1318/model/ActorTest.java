@@ -14,12 +14,12 @@ public class ActorTest {
 
                 .setName("redPlateRedSwitch")
                 .setAlliance(Alliance.RED)
+                .setType("ScoreKeeper")
                 .build();
 
         assertEquals("redPlateRedSwitch", actor.getName());
         assertEquals(Alliance.RED, actor.getAlliance());
-
-
+        assertEquals("ScoreKeeper", actor.getType());
     }
     @Test
     public void testBuilderWithJackson()throws Exception{
@@ -28,10 +28,12 @@ public class ActorTest {
 
                 .setName("redPlateRedSwitch")
                 .setAlliance(Alliance.RED)
+                .setType("ScoreKeeper")
                 .build();
 
         assertEquals("redPlateRedSwitch", actor.getName());
         assertEquals(Alliance.RED, actor.getAlliance());
+        assertEquals("ScoreKeeper", actor.getType());
         ObjectMapper objectMapper = new ObjectMapper();
         String value = objectMapper.writeValueAsString(actor);
         System.out.println(value);
