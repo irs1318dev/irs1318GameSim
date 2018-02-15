@@ -68,7 +68,7 @@ public class Actor {
         private Alliance alliance;
         private String type;
 
-        public Builder(){
+        public Builder() {
             listensTo = new HashSet<>();
         }
 

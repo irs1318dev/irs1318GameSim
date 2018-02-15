@@ -31,9 +31,8 @@ public class EmittedEvent {
         public Builder addProperties(String name, String value) {
             properties.put(name,value);
             return this;
+            
         }
-        public EmittedEvent build() {
-            return new EmittedEvent(eventName, properties);
-        }
+        public EmittedEvent build() {return new EmittedEvent(eventName, properties);}
     }
 }
