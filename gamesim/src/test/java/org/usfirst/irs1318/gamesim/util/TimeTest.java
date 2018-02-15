@@ -1,4 +1,4 @@
-package org.usfirst.irs1318.gamesim.data;
+package org.usfirst.irs1318.gamesim.util;
 
 import org.junit.Test;
 

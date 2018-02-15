@@ -1,4 +1,4 @@
-package org.usfirst.irs1318.gamesim.data;
+package org.usfirst.irs1318.gamesim.util;
 
 import java.util.Objects;
 
@@ -9,9 +9,6 @@ import java.util.Objects;
  * origin is at the bottom left of the arena, and the scale
  * is three feet per one unit. This location represents
  * a point on that graph.
- *
- * Locations may be negative, but this should be avoided if
- * possible.
  *
  * Locations should not be compared directly. Instead, they
  * should be checked to see if they're in an {@link Area}.

@@ -1,9 +1,9 @@
-package org.usfirst.irs1318.gamesim.data;
+package org.usfirst.irs1318.gamesim.util;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.usfirst.irs1318.gamesim.data.Direction.*;
+import static org.usfirst.irs1318.gamesim.util.Direction.*;
 
 public class LocationTest {
     private final Location left = new Location(-1, 0);
