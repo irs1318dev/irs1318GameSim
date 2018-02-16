@@ -1,7 +1,6 @@
 package org.usfirst.irs1318.model;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class EmittedEventTest {
@@ -16,7 +15,4 @@ public class EmittedEventTest {
 
         assertEquals("addCubeEvent", emittedEvent.getEventName());
     }
-
-
-
 }

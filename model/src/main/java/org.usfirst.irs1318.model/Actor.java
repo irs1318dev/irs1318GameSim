@@ -68,9 +68,7 @@ public class Actor {
         private Alliance alliance;
         private String type;
 
-        public Builder() {
-            listensTo = new HashSet<>();
-        }
+        public Builder() {listensTo = new HashSet<>();}
 
         @JsonProperty(value = "name")
         public Builder setName(String name){
