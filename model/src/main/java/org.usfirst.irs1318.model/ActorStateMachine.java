@@ -1,28 +1,23 @@
 package org.usfirst.irs1318.model;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-
 import java.util.*;
 
 public class ActorStateMachine {
     private final String name;
-
-    private final ImmutableSet<AcceptedEvent> events;
-    private final ImmutableSet<ActorStateVariable> data;
-    private final ImmutableList<DataUpdate> dataUpdates;
+    private final Set<AcceptedEvent> events;
+    private final Set<ActorStateVariable> data;
+    private final List<DataUpdate> dataUpdates;
     private final String initialState;
-    private final ImmutableSet<ActorState> states;
-    private final ImmutableList<ActorTransition> transitions;
+    private final Set<ActorState> states;
+    private final List<ActorTransition> transitions;
 
     public ActorStateMachine(String name,
-                             ImmutableSet<AcceptedEvent> events,
-                             ImmutableSet<ActorStateVariable> data,
-                             ImmutableList<DataUpdate> dataUpdates,
+                             Set<AcceptedEvent> events,
+                             Set<ActorStateVariable> data,
+                             List<DataUpdate> dataUpdates,
                              String initialState,
-                             ImmutableSet<ActorState> states,
-                             ImmutableList<ActorTransition> transitions) {
-
+                             Set<ActorState> states,
+                             List<ActorTransition> transitions) {
         this.name = name;
         this.events = events;
         this.data = data;
@@ -95,13 +90,20 @@ public class ActorStateMachine {
 
     public static class Builder {
         private String name;
-
-        private Set<AcceptedEvent> events = new HashSet<>();
-        private Set<ActorStateVariable> data = new HashSet<>();
-        private List<DataUpdate> dataUpdates = new ArrayList<>();
+        private Set<AcceptedEvent> events;
+        private Set<ActorStateVariable> data;
+        private List<DataUpdate> dataUpdates;
         private String initialState;
-        private Set<ActorState> states = new HashSet<>();
-        private List<ActorTransition> transitions = new ArrayList<>();
+        private Set<ActorState> states;
+        private List<ActorTransition> transitions;
+
+        public Builder(){
+            events = new HashSet<>();
+            data = new HashSet<>();
+            states = new HashSet<>();
+            dataUpdates = new ArrayList<>();
+            transitions = new ArrayList<>();
+        }
 
         public Builder setName(String name) {
             this.name = name;
@@ -140,12 +142,12 @@ public class ActorStateMachine {
 
         public ActorStateMachine build(){
             return new ActorStateMachine(name,
-                    ImmutableSet.copyOf(events),
-                    ImmutableSet.copyOf(data),
-                    ImmutableList.copyOf(dataUpdates),
+                    events,
+                    data,
+                    dataUpdates,
                     initialState,
-                    ImmutableSet.copyOf(states),
-                    ImmutableList.copyOf(transitions));
+                    states,
+                    transitions);
         }
     }
 }

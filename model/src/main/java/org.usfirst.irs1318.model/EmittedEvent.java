@@ -55,8 +55,11 @@ public class EmittedEvent {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
     public static class Builder {
         private String eventName;
-        private Map<String,String> properties = new HashMap<>();
+        private Map<String,String> properties;
 
+        public Builder() {
+            properties = new HashMap<>();
+        }
         @JsonProperty(value = "eventName")
         public Builder setEventName(String eventName) {
             this.eventName = eventName;
