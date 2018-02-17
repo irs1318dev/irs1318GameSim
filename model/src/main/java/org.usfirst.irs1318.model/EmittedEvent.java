@@ -7,14 +7,15 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableMap;
 
 @JsonDeserialize(builder = EmittedEvent.Builder.class)
 public class EmittedEvent {
 
     private final String eventName;
-    private final Map<String,String> properties;
+    private final ImmutableMap<String, String> properties;
 
-    private EmittedEvent(String eventName, Map<String,String> properties){
+    private EmittedEvent(String eventName, ImmutableMap<String, String> properties) {
         this.eventName = eventName;
         this.properties = properties;
     }
@@ -25,7 +26,7 @@ public class EmittedEvent {
     }
 
     @JsonProperty(value = "properties")
-    public Map<String, String> getProperties(){
+    public Map<String, String> getProperties() {
         return properties;
     }
 
@@ -55,22 +56,22 @@ public class EmittedEvent {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
     public static class Builder {
         private String eventName;
-        private Map<String,String> properties;
+        private Map<String, String> properties = new HashMap<>();
 
-        public Builder() {
-            properties = new HashMap<>();
-        }
         @JsonProperty(value = "eventName")
         public Builder setEventName(String eventName) {
             this.eventName = eventName;
             return this;
         }
+
         @JsonProperty(value = "properties")
         public Builder setProperties(Map<String, String> properties) {
             this.properties = properties;
             return this;
         }
 
-        public EmittedEvent build() {return new EmittedEvent(eventName, properties);}
+        public EmittedEvent build() {
+            return new EmittedEvent(eventName, ImmutableMap.copyOf(properties));
+        }
     }
 }
