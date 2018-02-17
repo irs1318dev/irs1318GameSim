@@ -34,7 +34,6 @@ public class ListensTo {
                 ", emittedEvents=" + emittedEvents +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,7 +52,6 @@ public class ListensTo {
     public static class Builder {
         private String actorName;
         private List<EmittedEvent> emittedEvents;
-
 
         public Builder(){
             emittedEvents = new ArrayList<>();
