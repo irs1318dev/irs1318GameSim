@@ -7,13 +7,14 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableList;
 
 @JsonDeserialize(builder = ListensTo.Builder.class)
 public class ListensTo {
     private final String actorName;
-    private final List<EmittedEvent> emittedEvents;
+    private final ImmutableList<EmittedEvent> emittedEvents;
 
-    private ListensTo(String actorName, List<EmittedEvent> emittedEvents){
+    private ListensTo(String actorName, ImmutableList<EmittedEvent> emittedEvents){
         this.emittedEvents = emittedEvents;
         this.actorName = actorName;
     }
@@ -34,6 +35,7 @@ public class ListensTo {
                 ", emittedEvents=" + emittedEvents +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,11 +53,8 @@ public class ListensTo {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
     public static class Builder {
         private String actorName;
-        private List<EmittedEvent> emittedEvents;
+        private List<EmittedEvent> emittedEvents = new ArrayList<>();
 
-        public Builder(){
-            emittedEvents = new ArrayList<>();
-        }
         @JsonProperty(value = "actorName")
         public Builder setActorName(String actorName){
             this.actorName = actorName;
@@ -69,7 +68,7 @@ public class ListensTo {
         }
 
         public ListensTo build(){
-            return new ListensTo(actorName, emittedEvents);
+            return new ListensTo(actorName, ImmutableList.copyOf(emittedEvents));
         }
     }
 }
