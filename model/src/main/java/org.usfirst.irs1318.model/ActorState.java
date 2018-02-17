@@ -55,6 +55,7 @@ public class ActorState {
         private String onEntry;
         private String onExit;
 
+
         public Builder setName(String name) {
             this.name = name;
             return this;

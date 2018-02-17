@@ -1,7 +1,5 @@
 package org.usfirst.irs1318.model;
 
-import com.google.common.collect.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -14,9 +12,9 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class EmittedEvent {
 
     private final String eventName;
-    private final ImmutableMap<String,String> properties;
+    private final Map<String,String> properties;
 
-    private EmittedEvent(String eventName, ImmutableMap<String,String> properties){
+    private EmittedEvent(String eventName, Map<String,String> properties){
         this.eventName = eventName;
         this.properties = properties;
     }
@@ -69,8 +67,7 @@ public class EmittedEvent {
             this.properties = properties;
             return this;
         }
-        public EmittedEvent build() {
-            return new EmittedEvent(eventName, ImmutableMap.copyOf(properties));
-        }
+
+        public EmittedEvent build() {return new EmittedEvent(eventName, properties);}
     }
 }

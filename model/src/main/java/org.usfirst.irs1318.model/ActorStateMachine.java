@@ -2,12 +2,12 @@ package org.usfirst.irs1318.model;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.*;
 
 public class ActorStateMachine {
     private final String name;
+
     private final ImmutableSet<AcceptedEvent> events;
     private final ImmutableSet<ActorStateVariable> data;
     private final ImmutableList<DataUpdate> dataUpdates;
@@ -22,6 +22,7 @@ public class ActorStateMachine {
                              String initialState,
                              ImmutableSet<ActorState> states,
                              ImmutableList<ActorTransition> transitions) {
+
         this.name = name;
         this.events = events;
         this.data = data;
@@ -94,6 +95,7 @@ public class ActorStateMachine {
 
     public static class Builder {
         private String name;
+
         private Set<AcceptedEvent> events = new HashSet<>();
         private Set<ActorStateVariable> data = new HashSet<>();
         private List<DataUpdate> dataUpdates = new ArrayList<>();
