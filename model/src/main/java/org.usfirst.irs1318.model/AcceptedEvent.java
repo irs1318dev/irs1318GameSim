@@ -16,7 +16,7 @@ public class AcceptedEvent {
     private String type;
     private ImmutableMap<String, String> data;
 
-    public AcceptedEvent(String eventName,
+    private AcceptedEvent(String eventName,
                          String type,
                          ImmutableMap<String, String> data) {
         this.eventName = eventName;
