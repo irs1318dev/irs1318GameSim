@@ -21,7 +21,7 @@ public class ActorTest {
         assertEquals("ScoreKeeper", actor.getType());
     }
     @Test
-    public void testBuilderWithJackson()throws Exception{
+    public void testBuilderWithJackson() throws Exception{
 
         Actor actor = new Actor.Builder()
 
