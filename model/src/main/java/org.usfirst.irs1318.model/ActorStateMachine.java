@@ -19,7 +19,7 @@ public class ActorStateMachine {
     private final ImmutableSet<ActorState> states;
     private final ImmutableList<ActorTransition> transitions;
 
-    public ActorStateMachine(String name,
+    private ActorStateMachine(String name,
                              ImmutableSet<AcceptedEvent> events,
                              ImmutableSet<ActorStateVariable> data,
                              ImmutableList<DataUpdate> dataUpdates,

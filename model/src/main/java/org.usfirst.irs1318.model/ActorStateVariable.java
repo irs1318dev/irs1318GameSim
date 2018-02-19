@@ -11,7 +11,7 @@ public class ActorStateVariable {
     private final String name;
     private final StateVariableType type;
 
-    public ActorStateVariable(String name, StateVariableType type) {
+    private ActorStateVariable(String name, StateVariableType type) {
         this.name = name;
         this.type = type;
     }
