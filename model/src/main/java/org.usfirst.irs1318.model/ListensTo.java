@@ -50,7 +50,7 @@ public class ListensTo {
         return Objects.hash(actorName, emittedEvents);
     }
 
-    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
+    @JsonPOJOBuilder
     public static class Builder {
         private String actorName;
         private List<EmittedEvent> emittedEvents = new ArrayList<>();

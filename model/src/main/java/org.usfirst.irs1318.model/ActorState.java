@@ -1,7 +1,12 @@
 package org.usfirst.irs1318.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import java.util.Objects;
 
+@JsonDeserialize(builder = ActorState.Builder.class)
 public class ActorState {
     private final String name;
     private final String onEntry;
@@ -13,14 +18,17 @@ public class ActorState {
         this.onExit = onExit;
     }
 
+    @JsonProperty(value = "name")
     public String getName() {
         return name;
     }
 
+    @JsonProperty(value = "onEntry")
     public String getOnEntry() {
         return onEntry;
     }
 
+    @JsonProperty(value = "onExit")
     public String getOnExit() {
         return onExit;
     }
@@ -50,30 +58,34 @@ public class ActorState {
                 '}';
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private String name;
         private String onEntry;
         private String onExit;
 
-        public Builder(){
+        public Builder() {
         }
 
+        @JsonProperty(value = "name")
         public Builder setName(String name) {
             this.name = name;
             return this;
         }
 
+        @JsonProperty(value = "onEntry")
         public Builder setOnEntry(String onEntry) {
             this.onEntry = onEntry;
             return this;
         }
 
+        @JsonProperty(value = "onExit")
         public Builder setOnExit(String onExit) {
             this.onExit = onExit;
             return this;
         }
 
-        public ActorState build(){
+        public ActorState build() {
             return new ActorState(name, onEntry, onExit);
         }
     }

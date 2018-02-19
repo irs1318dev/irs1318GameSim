@@ -15,7 +15,8 @@ public class EmittedEvent {
     private final String eventName;
     private final ImmutableMap<String, String> properties;
 
-    private EmittedEvent(String eventName, ImmutableMap<String, String> properties) {
+    private EmittedEvent(String eventName,
+                         ImmutableMap<String, String> properties) {
         this.eventName = eventName;
         this.properties = properties;
     }
@@ -53,7 +54,7 @@ public class EmittedEvent {
                 '}';
     }
 
-    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
+    @JsonPOJOBuilder
     public static class Builder {
         private String eventName;
         private Map<String, String> properties = new HashMap<>();
