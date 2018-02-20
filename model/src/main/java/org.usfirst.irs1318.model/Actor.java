@@ -15,12 +15,14 @@ public class Actor {
     private final ImmutableSet<ListensTo> listensTo;
     private final Alliance alliance;
     private final String type;
+    private final ImmutableSet<ActorStateMachine> behaviors;
 
-    private Actor(String name, ImmutableSet<ListensTo> listensTo, Alliance alliance, String type) {
+    private Actor(String name, ImmutableSet<ListensTo> listensTo, Alliance alliance, String type, ImmutableSet<ActorStateMachine> behaviors) {
         this.name = name;
         this.listensTo = listensTo; //Copy into immutable set
         this.alliance = alliance;
         this.type = type;
+        this.behaviors = behaviors;
     }
 
     public String getName() {
@@ -35,6 +37,14 @@ public class Actor {
         return type;
     }
 
+    public ImmutableSet<ListensTo> getListensTo() {
+        return listensTo;
+    }
+
+    public ImmutableSet<ActorStateMachine> getBehaviors() {
+        return behaviors;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,13 +53,14 @@ public class Actor {
         return Objects.equals(name, actor.name) &&
                 Objects.equals(listensTo, actor.listensTo) &&
                 alliance == actor.alliance &&
-                Objects.equals(type, actor.type);
+                Objects.equals(type, actor.type) &&
+                Objects.equals(behaviors, actor.behaviors);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, listensTo, alliance, type);
+        return Objects.hash(name, listensTo, alliance, type, behaviors);
     }
 
     @Override
@@ -58,7 +69,8 @@ public class Actor {
                 "name='" + name + '\'' +
                 ", listensTo=" + listensTo +
                 ", alliance=" + alliance +
-                ", type='" + type + '\'' +
+                ", type='" + type +
+                ", behaviors='" + behaviors + '\'' +
                 '}';
     }
 
@@ -68,6 +80,7 @@ public class Actor {
         private Set<ListensTo> listensTo = new HashSet<>();
         private Alliance alliance;
         private String type;
+        private Set<ActorStateMachine> behaviors;
 
         @JsonProperty(value = "name")
         public Builder setName(String name) {
@@ -75,8 +88,9 @@ public class Actor {
             return this;
         }
 
-        public Builder addListensTo(ListensTo listensTo) {
-            this.listensTo.add(listensTo);
+        @JsonProperty(value = "listensTo")
+        public Builder setListensTo(ImmutableSet<ListensTo> listensTo) {
+            this.listensTo = listensTo;
             return this;
         }
 
@@ -92,8 +106,13 @@ public class Actor {
             return this;
         }
 
+        public Builder setBehaviors(Set<ActorStateMachine> behaviors) {
+            this.behaviors = behaviors;
+            return this;
+        }
+
         public Actor build() {
-            return new Actor(name, ImmutableSet.copyOf(listensTo), alliance, type);
+            return new Actor(name, ImmutableSet.copyOf(listensTo), alliance, type, ImmutableSet.copyOf(behaviors));
         }
     }
 }
