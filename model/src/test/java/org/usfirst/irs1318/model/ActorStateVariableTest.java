@@ -33,7 +33,7 @@ public class ActorStateVariableTest {
         assertEquals("ownershipCount", actorStateVariable.getName());
         assertEquals(StateVariableType.INT, actorStateVariable.getType());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(actorStateVariable);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(actorStateVariable);
         System.out.println(value);
         ActorStateVariable actorStateVariableValue = objectMapper.readValue(value, ActorStateVariable.class);
         System.out.println(actorStateVariableValue.toString());

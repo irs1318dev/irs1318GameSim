@@ -94,7 +94,7 @@ public class Actor {
         }
 
         @JsonProperty(value = "listensTo")
-        public Builder setListensTo(ImmutableSet<ListensTo> listensTo) {
+        public Builder setListensTo(Set<ListensTo> listensTo) {
             this.listensTo = listensTo;
             return this;
         }
