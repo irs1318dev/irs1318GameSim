@@ -27,7 +27,7 @@ public class DataUpdateTest {
         assertEquals("redPlateRedSwitch", dataUpdate.getEvent());
         assertEquals("OwnershipChange", dataUpdate.getOnReceive());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(dataUpdate);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dataUpdate);
         System.out.println(value);
         DataUpdate dataUpdateValue = objectMapper.readValue(value, DataUpdate.class);
         System.out.println(dataUpdateValue.toString());

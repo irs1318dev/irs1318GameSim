@@ -98,7 +98,7 @@ public class ActorStateMachineTest {
         assertEquals("switchOwnership", actorStateMachine.getName());
         assertEquals("neutral", actorStateMachine.getInitialState());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(actorStateMachine);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(actorStateMachine);
         System.out.println(value);
         ActorStateMachine actorStateMachineValue = objectMapper.readValue(value, ActorStateMachine.class);
         System.out.println(actorStateMachineValue.toString());

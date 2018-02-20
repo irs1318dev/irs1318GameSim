@@ -47,7 +47,7 @@ public class ActorTransitionTest {
         assertEquals("calculateOwnership", actorTransition.getGuard());
         assertEquals(actorState2, actorTransition.getTo());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(actorTransition);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(actorTransition);
         System.out.println(value);
         ActorTransition actorTransitionValue = objectMapper.readValue(value, ActorTransition.class);
         System.out.println(actorTransitionValue.toString());

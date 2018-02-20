@@ -54,7 +54,7 @@ public class ListensToTest {
 
         assertEquals("redPlateRedSwitch", listensTo.getActorName());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(listensTo);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(listensTo);
         System.out.println(value);
         ListensTo listensToValue = objectMapper.readValue(value, ListensTo.class);
         System.out.println(listensToValue.toString());

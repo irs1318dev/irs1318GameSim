@@ -34,7 +34,7 @@ public class ActorStateTest {
         assertEquals("ownershipChangeEvent", actorState.getOnEntry());
         assertEquals("ownershipChangeEvent", actorState.getOnExit());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(actorState);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(actorState);
         System.out.println(value);
         ActorState actorStateValue = objectMapper.readValue(value, ActorState.class);
         System.out.println(actorStateValue.toString());

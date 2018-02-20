@@ -37,7 +37,7 @@ public class EmittedEventTest {
 
         assertEquals("addCubeEvent", emittedEvent.getEventName());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(emittedEvent);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(emittedEvent);
         System.out.println(value);
         EmittedEvent emittedEventValue = objectMapper.readValue(value, EmittedEvent.class);
         System.out.println(emittedEventValue.toString());

@@ -42,7 +42,7 @@ public class AcceptedEventTest {
         assertEquals("ownershipChangeEvent", acceptedEvent.getEventName());
         assertEquals("output", acceptedEvent.getType());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(acceptedEvent);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(acceptedEvent);
         System.out.println(value);
         AcceptedEvent acceptedEventValue = objectMapper.readValue(value, AcceptedEvent.class);
         System.out.println(acceptedEventValue.toString());
