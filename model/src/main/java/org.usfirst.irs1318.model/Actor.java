@@ -80,7 +80,7 @@ public class Actor {
         private Set<ListensTo> listensTo = new HashSet<>();
         private Alliance alliance;
         private String type;
-        private Set<ActorStateMachine> behaviors;
+        private Set<ActorStateMachine> behaviors = new HashSet<>();
 
         @JsonProperty(value = "name")
         public Builder setName(String name) {
@@ -89,7 +89,7 @@ public class Actor {
         }
 
         @JsonProperty(value = "listensTo")
-        public Builder setListensTo(ImmutableSet<ListensTo> listensTo) {
+        public Builder setListensTo(Set<ListensTo> listensTo) {
             this.listensTo = listensTo;
             return this;
         }
