@@ -1,6 +1,7 @@
 package org.usfirst.irs1318.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -34,7 +35,7 @@ public class ActorTest {
         assertEquals(Alliance.RED, actor.getAlliance());
         assertEquals("ScoreKeeper", actor.getType());
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writeValueAsString(actor);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(actor);
         System.out.println(value);
         Actor actorValue = objectMapper.readValue(value, Actor.class);
         System.out.println(actorValue.toString());

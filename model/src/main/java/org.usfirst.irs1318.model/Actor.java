@@ -25,22 +25,27 @@ public class Actor {
         this.behaviors = behaviors;
     }
 
+    @JsonProperty(value = "name")
     public String getName() {
         return name;
     }
 
+    @JsonProperty(value = "alliance")
     public Alliance getAlliance() {
         return alliance;
     }
 
+    @JsonProperty(value = "type")
     public String getType() {
         return type;
     }
 
+    @JsonProperty(value = "listensTo")
     public ImmutableSet<ListensTo> getListensTo() {
         return listensTo;
     }
 
+    @JsonProperty(value = "behaviors")
     public ImmutableSet<ActorStateMachine> getBehaviors() {
         return behaviors;
     }
@@ -69,8 +74,8 @@ public class Actor {
                 "name='" + name + '\'' +
                 ", listensTo=" + listensTo +
                 ", alliance=" + alliance +
-                ", type='" + type +
-                ", behaviors='" + behaviors + '\'' +
+                ", type='" + type + '\'' +
+                ", behaviors=" + behaviors +
                 '}';
     }
 
@@ -80,7 +85,7 @@ public class Actor {
         private Set<ListensTo> listensTo = new HashSet<>();
         private Alliance alliance;
         private String type;
-        private Set<ActorStateMachine> behaviors;
+        private Set<ActorStateMachine> behaviors = new HashSet<>();
 
         @JsonProperty(value = "name")
         public Builder setName(String name) {
@@ -106,6 +111,7 @@ public class Actor {
             return this;
         }
 
+        @JsonProperty(value = "behaviors")
         public Builder setBehaviors(Set<ActorStateMachine> behaviors) {
             this.behaviors = behaviors;
             return this;
