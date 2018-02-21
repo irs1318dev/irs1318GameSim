@@ -2,17 +2,16 @@ package org.usfirst.irs1318.model;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 
 import java.util.*;
 
-public class Event {
+public class FirstEvent {
 
 	private final ImmutableList<Match> qualifiers;
 	private final ImmutableList<Match> playoffs;
 	private final ImmutableMap<String, Team> teams;
 
-    public Event(ImmutableList<Match> qualifiers, ImmutableList<Match> playoffs, ImmutableMap<String, Team> teams) {
+    public FirstEvent(ImmutableList<Match> qualifiers, ImmutableList<Match> playoffs, ImmutableMap<String, Team> teams) {
         this.qualifiers = qualifiers;
         this.playoffs = playoffs;
         this.teams = teams;
@@ -35,7 +34,7 @@ public class Event {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
+        FirstEvent event = (FirstEvent) o;
         return Objects.equals(qualifiers, event.qualifiers) &&
                 Objects.equals(playoffs, event.playoffs) &&
                 Objects.equals(teams, event.teams);
@@ -49,7 +48,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "FirstEvent{" +
                 "qualifiers=" + qualifiers +
                 ", playoffs=" + playoffs +
                 ", teams=" + teams +
@@ -83,8 +82,8 @@ public class Event {
             return this;
         }
 
-        public Event build() {
-			return new Event(ImmutableList.copyOf(qualifiers), ImmutableList.copyOf(playoffs), ImmutableMap.copyOf(teams));
+        public FirstEvent build() {
+			return new FirstEvent(ImmutableList.copyOf(qualifiers), ImmutableList.copyOf(playoffs), ImmutableMap.copyOf(teams));
 		}
 	}
 }
