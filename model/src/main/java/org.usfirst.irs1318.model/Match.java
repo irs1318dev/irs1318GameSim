@@ -6,64 +6,74 @@ public class Match {
 
 	private final MatchAlliance blueAlliance;
 	private final MatchAlliance redAlliance;
+	private final MatchActor field; // create MatchField class
 
-	private Match(MatchAlliance blueAlliance, MatchAlliance redAlliance) {
-		this.blueAlliance = blueAlliance;
-		this.redAlliance = redAlliance;
-	}
+    public Match(MatchAlliance blueAlliance, MatchAlliance redAlliance, MatchActor field) {
+        this.blueAlliance = blueAlliance;
+        this.redAlliance = redAlliance;
+        this.field = field;
+    }
 
-	public MatchAlliance getBlue() {
-		return this.blueAlliance;
-	}
+    public MatchAlliance getBlueAlliance() {
+        return blueAlliance;
+    }
 
-	public MatchAlliance getRed() {
-		return this.redAlliance;
-	}
+    public MatchAlliance getRedAlliance() {
+        return redAlliance;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Match match = (Match) o;
-		return Objects.equals(blueAlliance, match.blueAlliance) &&
-				Objects.equals(redAlliance, match.redAlliance);
-	}
+    public MatchActor getField() {
+        return field;
+    }
 
-	@Override
-	public int hashCode() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Match match = (Match) o;
+        return Objects.equals(blueAlliance, match.blueAlliance) &&
+                Objects.equals(redAlliance, match.redAlliance) &&
+                Objects.equals(field, match.field);
+    }
 
-		return Objects.hash(blueAlliance, redAlliance);
-	}
+    @Override
+    public int hashCode() {
 
-	@Override
-	public String toString() {
-		return "Match{" +
-				"blueAlliance=" + blueAlliance +
-				", redAlliance=" + redAlliance +
-				'}';
-	}
+        return Objects.hash(blueAlliance, redAlliance, field);
+    }
 
-	public static class Builder {
+    @Override
+    public String toString() {
+        return "Match{" +
+                "blueAlliance=" + blueAlliance +
+                ", redAlliance=" + redAlliance +
+                ", field=" + field +
+                '}';
+    }
 
-		private MatchAlliance blueAlliance = new MatchAlliance.Builder().build();
-		private MatchAlliance redAlliance = new MatchAlliance.Builder().build();
+    public static class Builder {
 
-		public Builder() {
+		private MatchAlliance blueAlliance;
+		private MatchAlliance redAlliance;
+        private MatchActor field;
 
-		}
+        public Builder setBlueAlliance(MatchAlliance blueAlliance) {
+            this.blueAlliance = blueAlliance;
+            return this;
+        }
 
-		public Builder setBlue(MatchAlliance blue) {
-			this.blueAlliance = blue;
-			return this;
-		}
+        public Builder setRedAlliance(MatchAlliance redAlliance) {
+            this.redAlliance = redAlliance;
+            return this;
+        }
 
-		public Builder setRed(MatchAlliance red) {
-			this.redAlliance = red;
-			return this;
-		}
+        public Builder setField(MatchActor field) {
+            this.field = field;
+            return this;
+        }
 
-		public Match build() {
-			return new Match(blueAlliance, redAlliance);
+        public Match build() {
+			return new Match(blueAlliance, redAlliance, field);
 		}
 	}
 }
