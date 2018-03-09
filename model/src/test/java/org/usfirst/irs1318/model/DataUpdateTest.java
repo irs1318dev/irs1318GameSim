@@ -33,5 +33,4 @@ public class DataUpdateTest {
         System.out.println(dataUpdateValue.toString());
         assertEquals(dataUpdate, dataUpdateValue);
     }
-
 }
