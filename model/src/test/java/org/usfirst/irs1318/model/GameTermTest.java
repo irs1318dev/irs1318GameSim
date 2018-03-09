@@ -5,22 +5,22 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GameTermsTest {
+public class GameTermTest {
     @Test
     public void testBuilder(){
-        GameTerms gameTerms = new GameTerms.Builder()
+        GameTerm gameTerm = new GameTerm.Builder()
                 .build();
     }
     @Test
     public void testBuilderWithJackson()throws Exception{
 
-        GameTerms gameTerms = new GameTerms.Builder()
+        GameTerm gameTerm = new GameTerm.Builder()
                 .build();
         ObjectMapper objectMapper = new ObjectMapper();
-        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(gameTerms);
+        String value = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(gameTerm);
         System.out.println(value);
-        GameTerms gameTermsValue = objectMapper.readValue(value, GameTerms.class);
-        System.out.println(gameTermsValue.toString());
-        assertEquals(gameTerms, gameTermsValue);
+        GameTerm gameTermValue = objectMapper.readValue(value, GameTerm.class);
+        System.out.println(gameTermValue.toString());
+        assertEquals(gameTerm, gameTermValue);
     }
 }

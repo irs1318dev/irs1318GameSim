@@ -70,3 +70,5 @@ public class FieldSquare {
             return new FieldSquare(x, y);
         }
     }
+
+}
