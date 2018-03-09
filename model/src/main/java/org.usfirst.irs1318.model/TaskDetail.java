@@ -1,10 +1,11 @@
 package org.usfirst.irs1318.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.util.Objects;
-
+@JsonDeserialize(builder = TaskDetail.Builder.class)
 public class TaskDetail {
     private final int duration;
     private final int reactionTime;

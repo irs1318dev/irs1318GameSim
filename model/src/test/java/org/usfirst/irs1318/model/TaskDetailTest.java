@@ -8,7 +8,8 @@ import static junit.framework.TestCase.assertEquals;
 public class TaskDetailTest {
     @Test
     public void testBuilder() {
-        Task task = new Task();
+        Task task = new Task.Builder()
+                .build();
         TaskDetail taskdetail = new TaskDetail.Builder()
                 .setDuration(12)
                 .setReactionTime(4)
@@ -22,13 +23,15 @@ public class TaskDetailTest {
     }
     @Test
     public void testBuilderWithJackson() throws Exception{
-        Task task = new Task();
+        Task task = new Task.Builder()
+                .build();
         TaskDetail taskDetail =  new TaskDetail.Builder()
                 .setDuration(12)
                 .setReactionTime(4)
                 .setReliability(0.4)
                 .setTask(task)
                 .build();
+
         assertEquals(12, taskDetail.getDuration());
         assertEquals(0.4, taskDetail.getReliability());
         assertEquals(task, taskDetail.getTask());

@@ -11,11 +11,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-@JsonDeserialize(builder = GameTerms.Builder.class)
-public class GameTerms {
+@JsonDeserialize(builder = GameTerm.Builder.class)
+public class GameTerm {
     private final ImmutableMap<String, ImmutableSet<String>> definitions;
 
-    private GameTerms(ImmutableMap<String, ImmutableSet<String>> definitions) {
+    private GameTerm(ImmutableMap<String, ImmutableSet<String>> definitions) {
         this.definitions = definitions;
     }
 
@@ -28,8 +28,8 @@ public class GameTerms {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GameTerms gameTerms = (GameTerms) o;
-        return Objects.equals(definitions, gameTerms.definitions);
+        GameTerm gameTerm = (GameTerm) o;
+        return Objects.equals(definitions, gameTerm.definitions);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GameTerms {
 
     @Override
     public String toString() {
-        return "GameTerms{" +
+        return "GameTerm{" +
                 "definitions=" + definitions +
                 '}';
     }
@@ -56,13 +56,13 @@ public class GameTerms {
         }
 
 
-        public GameTerms build() {
+        public GameTerm build() {
             Map<String, ImmutableSet<String>> temp = new HashMap<>();
             definitions.keySet().stream()
                     .forEach(key ->
                     temp.put(key, ImmutableSet.copyOf(definitions.get(key)))
                     );
-            return new GameTerms(ImmutableMap.copyOf(temp));
+            return new GameTerm(ImmutableMap.copyOf(temp));
         }
     }
 }
