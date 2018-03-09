@@ -89,6 +89,7 @@ public class AcceptedEvent {
         }
 
         public AcceptedEvent build() {
+
             return new AcceptedEvent(eventName, type, ImmutableMap.copyOf(data));
         }
     }
