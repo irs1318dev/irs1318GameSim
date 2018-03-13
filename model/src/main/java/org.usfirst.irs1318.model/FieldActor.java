@@ -6,13 +6,15 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.util.Objects;
 
-@JsonDeserialize(builder = ActorStateVariable.Builder.class)
-public class ActorStateVariable {
+@JsonDeserialize(builder = FieldActor.Builder.class)
+public class FieldActor {
     private final String name;
-    private final StateVariableType type;
+    private final String id;
+    private final String type;
 
-    private ActorStateVariable(String name, StateVariableType type) {
+    public FieldActor(String name, String id, String type) {
         this.name = name;
+        this.id = id;
         this.type = type;
     }
 
@@ -21,8 +23,13 @@ public class ActorStateVariable {
         return name;
     }
 
+    @JsonProperty(value = "id")
+    public String getId() {
+        return id;
+    }
+
     @JsonProperty(value = "type")
-    public StateVariableType getType() {
+    public String getType() {
         return type;
     }
 
@@ -30,32 +37,32 @@ public class ActorStateVariable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ActorStateVariable that = (ActorStateVariable) o;
+        FieldActor that = (FieldActor) o;
         return Objects.equals(name, that.name) &&
-                type == that.type;
+                Objects.equals(id, that.id) &&
+                Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, type);
+        return Objects.hash(name, id, type);
     }
 
     @Override
     public String toString() {
-        return "ActorStateVariable{" +
+        return "FieldActor{" +
                 "name='" + name + '\'' +
-                ", type=" + type +
+                ", id='" + id + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 
     @JsonPOJOBuilder
     public static class Builder {
         private String name;
-        private StateVariableType type;
-
-        public Builder(){
-        }
+        private String id;
+        private String type;
 
         @JsonProperty(value = "name")
         public Builder setName(String name) {
@@ -63,14 +70,23 @@ public class ActorStateVariable {
             return this;
         }
 
+        @JsonProperty(value = "id")
+        public Builder setId(String id) {
+            this.id = id;
+            return this;
+        }
+
         @JsonProperty(value = "type")
-        public Builder setType(StateVariableType type) {
+        public Builder setType(String type) {
             this.type = type;
             return this;
         }
-        public ActorStateVariable build() {
-            return new ActorStateVariable(name, type);
-        }
-    }
-}
 
+        public FieldActor build() {
+            return new FieldActor(name, id, type);
+        }
+
+    }
+
+
+}

@@ -7,31 +7,47 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableSet;
 
 @JsonDeserialize(builder = Actor.Builder.class)
 public class Actor {
     private final String name;
-    private final Set<ListensTo> listensTo;
+    private final ImmutableSet<ListensTo> listensTo;
     private final Alliance alliance;
     private final String type;
+    private final ImmutableSet<ActorStateMachine> behaviors;
 
-    private Actor(String name, Set<ListensTo> listensTo, Alliance alliance, String type){
+    private Actor(String name, ImmutableSet<ListensTo> listensTo, Alliance alliance, String type, ImmutableSet<ActorStateMachine> behaviors) {
         this.name = name;
         this.listensTo = listensTo; //Copy into immutable set
         this.alliance = alliance;
         this.type = type;
+        this.behaviors = behaviors;
     }
 
+    @JsonProperty(value = "name")
     public String getName() {
         return name;
     }
 
-    public Alliance getAlliance(){
+    @JsonProperty(value = "alliance")
+    public Alliance getAlliance() {
         return alliance;
     }
 
-    public String getType(){
+    @JsonProperty(value = "type")
+    public String getType() {
         return type;
+    }
+
+    @JsonProperty(value = "listensTo")
+    public ImmutableSet<ListensTo> getListensTo() {
+        return listensTo;
+    }
+
+    @JsonProperty(value = "behaviors")
+    public ImmutableSet<ActorStateMachine> getBehaviors() {
+        return behaviors;
     }
 
     @Override
@@ -42,13 +58,14 @@ public class Actor {
         return Objects.equals(name, actor.name) &&
                 Objects.equals(listensTo, actor.listensTo) &&
                 alliance == actor.alliance &&
-                Objects.equals(type, actor.type);
+                Objects.equals(type, actor.type) &&
+                Objects.equals(behaviors, actor.behaviors);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, listensTo, alliance, type);
+        return Objects.hash(name, listensTo, alliance, type, behaviors);
     }
 
     @Override
@@ -58,30 +75,32 @@ public class Actor {
                 ", listensTo=" + listensTo +
                 ", alliance=" + alliance +
                 ", type='" + type + '\'' +
+                ", behaviors=" + behaviors +
                 '}';
     }
 
-    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
+    @JsonPOJOBuilder
     public static class Builder {
         private String name;
-        private Set<ListensTo> listensTo;
+        private Set<ListensTo> listensTo = new HashSet<>();
         private Alliance alliance;
         private String type;
-
-        public Builder() {listensTo = new HashSet<>();}
+        private Set<ActorStateMachine> behaviors = new HashSet<>();
 
         @JsonProperty(value = "name")
-        public Builder setName(String name){
+        public Builder setName(String name) {
             this.name = name;
             return this;
         }
-        public Builder addListensTo(ListensTo listensTo){
-            this.listensTo.add(listensTo);
+
+        @JsonProperty(value = "listensTo")
+        public Builder setListensTo(Set<ListensTo> listensTo) {
+            this.listensTo = listensTo;
             return this;
         }
 
         @JsonProperty(value = "alliance")
-        public Builder setAlliance(Alliance alliance){
+        public Builder setAlliance(Alliance alliance) {
             this.alliance = alliance;
             return this;
         }
@@ -91,8 +110,15 @@ public class Actor {
             this.type = type;
             return this;
         }
-        public Actor build(){
-            return new Actor(name, listensTo, alliance, type);
+
+        @JsonProperty(value = "behaviors")
+        public Builder setBehaviors(Set<ActorStateMachine> behaviors) {
+            this.behaviors = behaviors;
+            return this;
+        }
+
+        public Actor build() {
+            return new Actor(name, ImmutableSet.copyOf(listensTo), alliance, type, ImmutableSet.copyOf(behaviors));
         }
     }
 }

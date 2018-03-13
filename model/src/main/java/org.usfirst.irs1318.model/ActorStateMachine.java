@@ -1,23 +1,31 @@
 package org.usfirst.irs1318.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.util.*;
 
+@JsonDeserialize(builder = ActorStateMachine.Builder.class)
 public class ActorStateMachine {
     private final String name;
-    private final Set<AcceptedEvent> events;
-    private final Set<ActorStateVariable> data;
-    private final List<DataUpdate> dataUpdates;
+    private final ImmutableSet<AcceptedEvent> events;
+    private final ImmutableSet<ActorStateVariable> data;
+    private final ImmutableList<DataUpdate> dataUpdates;
     private final String initialState;
-    private final Set<ActorState> states;
-    private final List<ActorTransition> transitions;
+    private final ImmutableSet<ActorState> states;
+    private final ImmutableList<ActorTransition> transitions;
 
-    public ActorStateMachine(String name,
-                             Set<AcceptedEvent> events,
-                             Set<ActorStateVariable> data,
-                             List<DataUpdate> dataUpdates,
+    private ActorStateMachine(String name,
+                             ImmutableSet<AcceptedEvent> events,
+                             ImmutableSet<ActorStateVariable> data,
+                             ImmutableList<DataUpdate> dataUpdates,
                              String initialState,
-                             Set<ActorState> states,
-                             List<ActorTransition> transitions) {
+                             ImmutableSet<ActorState> states,
+                             ImmutableList<ActorTransition> transitions) {
         this.name = name;
         this.events = events;
         this.data = data;
@@ -27,30 +35,37 @@ public class ActorStateMachine {
         this.transitions = transitions;
     }
 
+    @JsonProperty(value = "name")
     public String getName() {
         return name;
     }
 
+    @JsonProperty(value = "events")
     public Set<AcceptedEvent> getEvents() {
         return events;
     }
 
+    @JsonProperty(value = "data")
     public Set<ActorStateVariable> getData() {
         return data;
     }
 
+    @JsonProperty(value = "dataUpdates")
     public List<DataUpdate> getDataUpdates() {
         return dataUpdates;
     }
 
+    @JsonProperty(value = "initialState")
     public String getInitialState() {
         return initialState;
     }
 
+    @JsonProperty(value = "states")
     public Set<ActorState> getStates() {
         return states;
     }
 
+    @JsonProperty(value = "transitions")
     public List<ActorTransition> getTransitions() {
         return transitions;
     }
@@ -88,66 +103,66 @@ public class ActorStateMachine {
                 '}';
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private String name;
-        private Set<AcceptedEvent> events;
-        private Set<ActorStateVariable> data;
-        private List<DataUpdate> dataUpdates;
+        private Set<AcceptedEvent> events = new HashSet<>();
+        private Set<ActorStateVariable> data = new HashSet<>();
+        private List<DataUpdate> dataUpdates = new ArrayList<>();
         private String initialState;
-        private Set<ActorState> states;
-        private List<ActorTransition> transitions;
+        private Set<ActorState> states = new HashSet<>();
+        private List<ActorTransition> transitions = new ArrayList<>();
 
-        public Builder(){
-            events = new HashSet<>();
-            data = new HashSet<>();
-            states = new HashSet<>();
-            dataUpdates = new ArrayList<>();
-            transitions = new ArrayList<>();
-        }
-
+        @JsonProperty(value = "name")
         public Builder setName(String name) {
             this.name = name;
             return this;
         }
 
+        @JsonProperty(value = "events")
         public Builder setEvents(Set<AcceptedEvent> events) {
             this.events = events;
             return this;
         }
 
+        @JsonProperty(value = "data")
         public Builder setData(Set<ActorStateVariable> data) {
             this.data = data;
             return this;
         }
 
+        @JsonProperty(value = "dataUpdates")
         public Builder setDataUpdates(List<DataUpdate> dataUpdates) {
             this.dataUpdates = dataUpdates;
             return this;
         }
 
+        @JsonProperty(value = "initialState")
         public Builder setInitialState(String initialState) {
             this.initialState = initialState;
             return this;
         }
 
+        @JsonProperty(value = "states")
         public Builder setStates(Set<ActorState> states) {
             this.states = states;
             return this;
         }
 
+        @JsonProperty(value = "transitions")
         public Builder setTransitions(List<ActorTransition> transitions) {
             this.transitions = transitions;
             return this;
         }
 
-        public ActorStateMachine build(){
+        public ActorStateMachine build() {
             return new ActorStateMachine(name,
-                    events,
-                    data,
-                    dataUpdates,
+                    ImmutableSet.copyOf(events),
+                    ImmutableSet.copyOf(data),
+                    ImmutableList.copyOf(dataUpdates),
                     initialState,
-                    states,
-                    transitions);
+                    ImmutableSet.copyOf(states),
+                    ImmutableList.copyOf(transitions));
         }
     }
 }

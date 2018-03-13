@@ -1,7 +1,12 @@
 package org.usfirst.irs1318.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import java.util.Objects;
 
+@JsonDeserialize(builder = ActorTransition.Builder.class)
 public class ActorTransition {
     private final ActorState from;
     private final AcceptedEvent trigger;
@@ -18,18 +23,22 @@ public class ActorTransition {
         this.to = to;
     }
 
+    @JsonProperty(value = "from")
     public ActorState getFrom() {
         return from;
     }
 
+    @JsonProperty(value = "trigger")
     public AcceptedEvent getTrigger() {
         return trigger;
     }
 
+    @JsonProperty(value = "guard")
     public String getGuard() {
         return guard;
     }
 
+    @JsonProperty(value = "to")
     public ActorState getTo() {
         return to;
     }
@@ -61,6 +70,7 @@ public class ActorTransition {
                 '}';
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private ActorState from;
         private AcceptedEvent trigger;
@@ -70,21 +80,26 @@ public class ActorTransition {
         public Builder() {
 
         }
+
+        @JsonProperty(value = "from")
         public Builder setFrom(ActorState from) {
             this.from = from;
             return this;
         }
 
+        @JsonProperty(value = "trigger")
         public Builder setTrigger(AcceptedEvent trigger) {
             this.trigger = trigger;
             return this;
         }
 
+        @JsonProperty(value = "guard")
         public Builder setGuard(String guard) {
             this.guard = guard;
             return this;
         }
 
+        @JsonProperty(value = "to")
         public Builder setTo(ActorState to) {
             this.to = to;
             return this;
