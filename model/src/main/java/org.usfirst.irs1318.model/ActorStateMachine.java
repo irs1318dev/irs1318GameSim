@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import jdk.nashorn.internal.ir.annotations.Immutable;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 @JsonDeserialize(builder = ActorStateMachine.Builder.class)
@@ -20,12 +20,12 @@ public class ActorStateMachine {
     private final ImmutableList<ActorTransition> transitions;
 
     private ActorStateMachine(String name,
-                             ImmutableSet<AcceptedEvent> events,
-                             ImmutableSet<ActorStateVariable> data,
-                             ImmutableList<DataUpdate> dataUpdates,
-                             String initialState,
-                             ImmutableSet<ActorState> states,
-                             ImmutableList<ActorTransition> transitions) {
+                              ImmutableSet<AcceptedEvent> events,
+                              ImmutableSet<ActorStateVariable> data,
+                              ImmutableList<DataUpdate> dataUpdates,
+                              String initialState,
+                              ImmutableSet<ActorState> states,
+                              ImmutableList<ActorTransition> transitions) {
         this.name = name;
         this.events = events;
         this.data = data;
@@ -69,6 +69,39 @@ public class ActorStateMachine {
     public List<ActorTransition> getTransitions() {
         return transitions;
     }
+
+
+    public AcceptedEventResponse accept(MatchActor matchActor, AcceptedEvent acceptedEvent) {
+        MatchState currentState = matchActor.getCurrentState();
+        Optional<ActorTransition> transition = getTransitionForState(currentState.getActorState(), acceptedEvent);
+        if (transition.isPresent()) {
+
+            MatchActor updatedMatchActor =
+                    new MatchActor.Builder()
+                            .setCurrentState(new MatchState.Builder()
+                                    .setActorState(transition.get().getTo())
+                                    .build())
+                            .setActor(matchActor.getActor())
+                            .build();
+            return new AcceptedEventResponse.Builder()
+                    .setMatchActor(updatedMatchActor)
+                    .build();
+        }
+        return new AcceptedEventResponse.Builder()
+                .setMatchActor(matchActor)
+                .build();
+    }
+
+    private Optional<ActorTransition> getTransitionForState(@Nonnull ActorState state,
+                                                            @Nonnull AcceptedEvent acceptedEvent) {
+
+        return transitions.stream()
+                .filter(transition -> acceptedEvent.equals(transition.getTrigger()))
+                .filter(transition -> state.equals(transition.getFrom()))
+                .findFirst();
+
+    }
+
 
     @Override
     public boolean equals(Object o) {

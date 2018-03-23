@@ -50,6 +50,14 @@ public class Actor {
         return behaviors;
     }
 
+    //get initial state
+    public AcceptedEventResponse accept(MatchActor matchActor, AcceptedEvent acceptedEvent){
+        ActorStateMachine stateMachine = behaviors.stream().findFirst().get();
+        return stateMachine.accept(matchActor, acceptedEvent);
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
