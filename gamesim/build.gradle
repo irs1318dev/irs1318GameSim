@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':model')
     compile 'com.google.inject:guice:4.1.0'
     compile 'com.google.guava:guava:24.0-jre'
     compile 'org.functionaljava:functionaljava-java8:4.7'

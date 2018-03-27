@@ -5,28 +5,24 @@ import java.util.Objects;
 /**
  * Class that represents an immutable location.
  *
- * A game can be treated as though it were on a graph. The
- * origin is at the bottom left of the arena, and the scale
- * is one meter per one unit. This location represents a point
- * on that graph.
- *
- * Locations should not be compared directly. Instead, they
- * should be checked to see if they're in an {@link Area}.
+ * A game can be treated as though it were on a graph. The origin is at the
+ * bottom left of the arena, and the scale is three feet per one unit. This
+ * location represents a point on that graph.
  */
 public final class Location {
-    private final float x;
-    private final float y;
+    private final int x;
+    private final int y;
 
-    public Location(float x, float y) {
+    public Location(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public float getX() {
+    public int getX() {
         return x;
     }
 
-    public float getY() {
+    public int getY() {
         return y;
     }
 
