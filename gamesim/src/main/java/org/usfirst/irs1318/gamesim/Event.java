@@ -1,4 +1,4 @@
-package org.usfirst.irs1318.gamesim.game;
+package org.usfirst.irs1318.gamesim;
 
 import org.usfirst.irs1318.gamesim.units.Time;
 

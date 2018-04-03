@@ -1,5 +1,6 @@
-package org.usfirst.irs1318.gamesim.game;
+package org.usfirst.irs1318.gamesim;
 
+import fj.Ord;
 import fj.data.TreeMap;
 import org.usfirst.irs1318.model.MatchActor;
 
@@ -12,9 +13,21 @@ public final class GameState {
     private final EventQueue eventQueue;
     private final TreeMap<String, MatchActor> actors;
 
+    public GameState() {
+        this(new EventQueue(), TreeMap.empty(Ord.stringOrd));
+    }
+
     public GameState(EventQueue eventQueue, TreeMap<String, MatchActor> actors) {
         this.eventQueue = eventQueue;
         this.actors = actors;
+    }
+
+    public GameState addEvent(Event event) {
+        return mapEventQueue(eventQueue -> eventQueue.add(event));
+    }
+
+    public GameState addActor(MatchActor actor) {
+        return mapActors(actors -> actors.set(actor.getActor().getName(), actor));
     }
 
     public EventQueue getEventQueue() {

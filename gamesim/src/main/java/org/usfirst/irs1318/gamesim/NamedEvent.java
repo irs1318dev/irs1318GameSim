@@ -1,4 +1,4 @@
-package org.usfirst.irs1318.gamesim.game;
+package org.usfirst.irs1318.gamesim;
 
 import org.jooq.lambda.Seq;
 import org.usfirst.irs1318.gamesim.units.Time;
@@ -6,13 +6,13 @@ import org.usfirst.irs1318.model.*;
 
 import java.util.Optional;
 
-public final class ActorEvent implements Event {
+public final class NamedEvent implements Event {
     private final Time time;
-    private final String actorName;
+    private final String eventName;
 
-    public ActorEvent(Time time, String actorName) {
+    public NamedEvent(Time time, String eventName) {
         this.time = time;
-        this.actorName = actorName;
+        this.eventName = eventName;
     }
 
     @Override
@@ -22,15 +22,17 @@ public final class ActorEvent implements Event {
 
     @Override
     public GameState apply(GameState gameState) {
-        return gameState.mapActor(actorName, matchActor -> {
-            Actor actor = matchActor.getActor();
-            MatchState newState = Seq.seq(actor.getBehaviors().stream())
-                    .foldRight(matchActor.getCurrentState(), this::run);
-            return new MatchActor.Builder()
-                    .setActor(actor)
-                    .setCurrentState(newState)
-                    .build();
-        });
+        return gameState.mapActors(actors -> actors.map(this::apply));
+    }
+
+    private MatchActor apply(MatchActor matchActor) {
+        Actor actor = matchActor.getActor();
+        MatchState newState = Seq.seq(actor.getBehaviors().stream())
+                .foldRight(matchActor.getCurrentState(), this::run);
+        return new MatchActor.Builder()
+                .setActor(actor)
+                .setCurrentState(newState)
+                .build();
     }
 
     private MatchState run(ActorStateMachine stateMachine, MatchState state) {
@@ -44,6 +46,7 @@ public final class ActorEvent implements Event {
     private Optional<ActorTransition> getTransition(ActorStateMachine stateMachine, ActorState state) {
         return stateMachine.getTransitions()
                 .stream()
+                .filter(transition -> transition.getTrigger().getEventName().equals(eventName))
                 .filter(transition -> state.equals(transition.getFrom()))
                 .findFirst();
     }

@@ -1,8 +1,10 @@
-package org.usfirst.irs1318.gamesim.game;
+package org.usfirst.irs1318.gamesim;
 
-import fj.Ord;
-import fj.data.Set;
+import fj.Equal;
+import fj.Monoid;
+import fj.data.PriorityQueue;
 import org.jooq.lambda.tuple.Tuple2;
+import org.usfirst.irs1318.gamesim.units.Time;
 
 import java.util.Objects;
 
@@ -10,13 +12,16 @@ import java.util.Objects;
  * A queue of events, sorted by time.
  */
 public final class EventQueue {
-    private final Set<Event> events;
+    private static final Monoid<Time> timeMonoid = Monoid.monoid((x, y) -> x.getX() < y.getX() ? x : y, new Time(0));
 
-    public EventQueue(java.util.Set<Event> events) {
-        this(Set.iterableSet(Ord.comparableOrd(), events));
+    private final PriorityQueue<Time, Event> events;
+
+    public EventQueue() {
+        //noinspection RedundantTypeArguments
+        this(PriorityQueue.empty(timeMonoid, Equal.anyEqual()));
     }
 
-    public EventQueue(Set<Event> events) {
+    public EventQueue(PriorityQueue<Time, Event> events) {
         this.events = events;
     }
 
@@ -25,16 +30,16 @@ public final class EventQueue {
     }
 
     public EventQueue add(Event event) {
-        return new EventQueue(events.insert(event));
+        return new EventQueue(events.enqueue(event.getTime(), event));
     }
 
     public Event peek() {
-        return events.min().some();
+        return events.top().some()._2();
     }
 
     public Tuple2<Event, EventQueue> pop() {
-        Event min = events.min().some();
-        return new Tuple2<>(min, new EventQueue(events.delete(min)));
+        Event min = events.top().some()._2();
+        return new Tuple2<>(min, new EventQueue(events.dequeue()));
     }
 
     @Override
