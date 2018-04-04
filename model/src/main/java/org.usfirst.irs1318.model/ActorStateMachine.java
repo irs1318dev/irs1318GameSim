@@ -146,6 +146,17 @@ public class ActorStateMachine {
         private Set<ActorState> states = new HashSet<>();
         private List<ActorTransition> transitions = new ArrayList<>();
 
+        public Builder copyOf(ActorStateMachine actorStateMachine) {
+            this.name = actorStateMachine.getName();
+            this.events = actorStateMachine.getEvents();
+            this.data = actorStateMachine.getData();
+            this.initialState = actorStateMachine.getInitialState();
+            this.states = actorStateMachine.getStates();
+            this.transitions = actorStateMachine.getTransitions();
+            return this;
+
+        }
+
         @JsonProperty(value = "name")
         public Builder setName(String name) {
             this.name = name;

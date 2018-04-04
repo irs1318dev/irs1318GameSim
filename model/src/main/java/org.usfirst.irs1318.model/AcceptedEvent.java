@@ -70,6 +70,14 @@ public class AcceptedEvent {
         private String type;
         private Map<String, String> data = new HashMap<>();
 
+        public Builder copyOf(AcceptedEvent acceptedEvent) {
+            this.eventName = acceptedEvent.getEventName();
+            this.type = acceptedEvent.getType();
+            this.data = acceptedEvent.data;
+            return this;
+
+        }
+
         @JsonProperty(value = "eventName")
         public Builder setEventName(String eventName) {
             this.eventName = eventName;

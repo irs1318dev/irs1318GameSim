@@ -42,6 +42,9 @@ public class EmittedEventTest {
         EmittedEvent emittedEventValue = objectMapper.readValue(value, EmittedEvent.class);
         System.out.println(emittedEventValue.toString());
         assertEquals(emittedEvent, emittedEventValue);
+
+        EmittedEvent copyEmittedEvent = new EmittedEvent.Builder().copyOf(emittedEvent).build();
+        assertEquals(emittedEvent, copyEmittedEvent);
     }
 
 }

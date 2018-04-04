@@ -64,7 +64,11 @@ public class ActorState {
         private String onEntry;
         private String onExit;
 
-        public Builder() {
+        public Builder copyOf(ActorState actorState) {
+            this.name = actorState.getName();
+            this.onEntry = actorState.getOnEntry();
+            this.onExit = actorState.getOnExit();
+            return this;
         }
 
         @JsonProperty(value = "name")

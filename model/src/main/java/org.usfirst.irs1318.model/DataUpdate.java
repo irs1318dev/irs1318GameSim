@@ -52,6 +52,13 @@ public class DataUpdate {
     public static class Builder{
         private String event;
         private String onReceive;
+
+        public Builder copyOf(DataUpdate dataUpdate){
+            this.event = dataUpdate.getEvent();
+            this.onReceive = dataUpdate.onReceive;
+            return this;
+
+        }
         @JsonProperty(value = "event")
         public Builder setEvent(String event) {
             this.event = event;

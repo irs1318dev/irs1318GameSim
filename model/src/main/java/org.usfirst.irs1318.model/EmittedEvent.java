@@ -59,6 +59,12 @@ public class EmittedEvent {
         private String eventName;
         private Map<String, String> properties = new HashMap<>();
 
+        public Builder copyOf(EmittedEvent emittedEvent) {
+            this.eventName = emittedEvent.getEventName();
+            this.properties = emittedEvent.getProperties();
+            return this;
+        }
+
         @JsonProperty(value = "eventName")
         public Builder setEventName(String eventName) {
             this.eventName = eventName;

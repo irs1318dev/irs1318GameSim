@@ -47,6 +47,9 @@ public class AcceptedEventTest {
         AcceptedEvent acceptedEventValue = objectMapper.readValue(value, AcceptedEvent.class);
         System.out.println(acceptedEventValue.toString());
         assertEquals(acceptedEvent, acceptedEventValue);
+
+        AcceptedEvent copyAcceptedEvent = new AcceptedEvent.Builder().copyOf(acceptedEvent).build();
+        assertEquals(acceptedEvent, copyAcceptedEvent);
     }
 
 

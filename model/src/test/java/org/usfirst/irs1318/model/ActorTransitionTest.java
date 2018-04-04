@@ -52,6 +52,9 @@ public class ActorTransitionTest {
         ActorTransition actorTransitionValue = objectMapper.readValue(value, ActorTransition.class);
         System.out.println(actorTransitionValue.toString());
         assertEquals(actorTransition, actorTransitionValue);
+
+        ActorTransition copyActorTransition = new ActorTransition.Builder().copyOf(actorTransition).build();
+        assertEquals(actorTransition, copyActorTransition);
     }
 
 

@@ -32,5 +32,8 @@ public class DataUpdateTest {
         DataUpdate dataUpdateValue = objectMapper.readValue(value, DataUpdate.class);
         System.out.println(dataUpdateValue.toString());
         assertEquals(dataUpdate, dataUpdateValue);
+
+        DataUpdate copyDataUpdate = new DataUpdate.Builder().copyOf(dataUpdate).build();
+        assertEquals(dataUpdate, copyDataUpdate);
     }
 }

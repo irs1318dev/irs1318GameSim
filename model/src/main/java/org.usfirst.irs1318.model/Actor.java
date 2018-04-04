@@ -95,7 +95,6 @@ public class Actor {
         private String type;
         private Set<ActorStateMachine> behaviors = new HashSet<>();
 
-
         public Builder copyOf(Actor actor){
             this.name = actor.getName();
             this.listensTo = actor.getListensTo();

@@ -103,5 +103,8 @@ public class ActorStateMachineTest {
         ActorStateMachine actorStateMachineValue = objectMapper.readValue(value, ActorStateMachine.class);
         System.out.println(actorStateMachineValue.toString());
         assertEquals(actorStateMachine, actorStateMachineValue);
+
+        ActorStateMachine copyActorStateMachine = new ActorStateMachine.Builder().copyOf(actorStateMachine).build();
+        assertEquals(actorStateMachine, copyActorStateMachine);
     }
 }

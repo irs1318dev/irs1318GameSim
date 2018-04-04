@@ -38,5 +38,8 @@ public class ActorStateVariableTest {
         ActorStateVariable actorStateVariableValue = objectMapper.readValue(value, ActorStateVariable.class);
         System.out.println(actorStateVariableValue.toString());
         assertEquals(actorStateVariable, actorStateVariableValue);
+
+        ActorStateVariable copyActorStateVariable = new ActorStateVariable.Builder().copyOf(actorStateVariable).build();
+        assertEquals(actorStateVariable, copyActorStateVariable);
     }
 }

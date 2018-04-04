@@ -77,7 +77,13 @@ public class ActorTransition {
         private String guard;
         private ActorState to;
 
-        public Builder() {
+        public Builder copyOf(ActorTransition actorTransition) {
+            this.from = actorTransition.getFrom();
+            this.trigger = actorTransition.getTrigger();
+            this.guard = actorTransition.getGuard();
+            this.to = actorTransition.getTo();
+            return this;
+
 
         }
 

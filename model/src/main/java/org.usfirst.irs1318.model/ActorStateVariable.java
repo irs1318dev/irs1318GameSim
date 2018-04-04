@@ -54,7 +54,10 @@ public class ActorStateVariable {
         private String name;
         private StateVariableType type;
 
-        public Builder(){
+        public Builder copyOf(ActorStateVariable actorStateVariable){
+            this.name = actorStateVariable.getName();
+            this.type = actorStateVariable.getType();
+            return this;
         }
 
         @JsonProperty(value = "name")
