@@ -5,8 +5,8 @@ import java.util.Objects;
 /**
  * Class that represents an immutable area.
  *
- * An area is a location and a size. It uses the same units
- * as {@link Location}.
+ * An area is a location and a size, where the location is bottom left of the
+ * area. It uses the same units as {@link Location}.
  */
 public final class Area {
     private final Location location;

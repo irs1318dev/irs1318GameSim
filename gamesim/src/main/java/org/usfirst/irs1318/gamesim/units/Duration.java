@@ -5,8 +5,7 @@ import java.util.Objects;
 /**
  * Class that represents an immutable duration.
  *
- * A duration is a time and a size. It uses the same units
- * as {@link Time}.
+ * A duration is a time and a size. It uses the same units as {@link Time}.
  */
 public final class Duration {
     private final Time time;
