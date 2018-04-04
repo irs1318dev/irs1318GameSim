@@ -67,5 +67,10 @@ public class ActorTest {
         Actor actorValue = objectMapper.readValue(value, Actor.class);
         System.out.println(actorValue.toString());
         assertEquals(actor, actorValue);
+
+        Actor copyActor = new Actor.Builder().copyOf(actor).build();
+        assertEquals(actor, copyActor);
+
     }
+
 }
