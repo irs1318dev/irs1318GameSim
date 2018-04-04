@@ -95,6 +95,16 @@ public class Actor {
         private String type;
         private Set<ActorStateMachine> behaviors = new HashSet<>();
 
+
+        public Builder copyOf(Actor actor){
+            this.name = actor.getName();
+            this.listensTo = actor.getListensTo();
+            this.alliance = actor.getAlliance();
+            this.type = actor.getType();
+            this.behaviors = actor.getBehaviors();
+            return this;
+        }
+
         @JsonProperty(value = "name")
         public Builder setName(String name) {
             this.name = name;

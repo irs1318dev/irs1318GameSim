@@ -1,0 +1,57 @@
+{
+  "name" : "field",
+  "type" : "field",
+  "alliance" : "NEUTRAL",
+  "behaviors" : [ {
+    "name" : "fieldPhase",
+    "events" : [
+      {
+        "eventName" : "phaseChangeEvent",
+        "type" : "input"
+      }
+    ],
+    "data" : [ ],
+    "dataUpdates" : [ ],
+    "initialState" : "pre",
+    "states" : [
+      {
+        "name" : "pre"
+      },
+      {
+        "name" : "auto"
+      },
+      {
+        "name" : "teleop"
+      },
+      {
+        "name" : "endGame"
+      },
+      {
+        "name" : "post"
+      }
+    ],
+    "transitions" : [
+      {
+        "from" : "pre",
+        "trigger" : "phaseChangeEvent",
+        "to" : "auto"
+      },
+      {
+        "from" : "auto",
+        "trigger" : "phaseChangeEvent",
+        "to" : "teleop"
+      },
+      {
+        "from" : "teleop",
+        "trigger" : "phaseChangeEvent",
+        "to" : "endGame"
+      },
+      {
+        "from" : "endGame",
+        "trigger" : "phaseChangeEvent",
+        "to" : "post"
+      }
+    ]
+  } ]
+
+}
