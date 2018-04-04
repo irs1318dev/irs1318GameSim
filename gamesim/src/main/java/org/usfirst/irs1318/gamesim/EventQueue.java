@@ -4,7 +4,7 @@ import fj.Equal;
 import fj.Monoid;
 import fj.data.PriorityQueue;
 import org.jooq.lambda.tuple.Tuple2;
-import org.usfirst.irs1318.gamesim.units.Time;
+import org.usfirst.irs1318.model.Time;
 
 import java.util.Objects;
 

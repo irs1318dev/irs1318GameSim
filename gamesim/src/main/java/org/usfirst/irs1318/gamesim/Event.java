@@ -1,6 +1,6 @@
 package org.usfirst.irs1318.gamesim;
 
-import org.usfirst.irs1318.gamesim.units.Time;
+import org.usfirst.irs1318.model.Time;
 
 import javax.annotation.Nonnull;
 import java.util.function.UnaryOperator;

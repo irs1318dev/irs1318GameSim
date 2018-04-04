@@ -1,4 +1,4 @@
-package org.usfirst.irs1318.gamesim.units;
+package org.usfirst.irs1318.model;
 
 import java.util.Objects;
 
