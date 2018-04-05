@@ -17,7 +17,6 @@ public final class EventQueue {
     private final PriorityQueue<Time, Event> events;
 
     public EventQueue() {
-        //noinspection RedundantTypeArguments
         this(PriorityQueue.empty(timeMonoid, Equal.anyEqual()));
     }
 
