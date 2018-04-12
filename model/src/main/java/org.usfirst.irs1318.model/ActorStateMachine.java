@@ -153,6 +153,7 @@ public class ActorStateMachine {
             this.initialState = actorStateMachine.getInitialState();
             this.states = actorStateMachine.getStates();
             this.transitions = actorStateMachine.getTransitions();
+            this.dataUpdates = actorStateMachine.getDataUpdates();
             return this;
 
         }
