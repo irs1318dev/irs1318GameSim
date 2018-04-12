@@ -87,6 +87,15 @@ public class Field {
         private int gridStepY;
         private Map<String, FieldSquare> fieldSquares = new HashMap<>();
 
+        public Builder copyOf(Field field){
+            this.length = field.getLength();
+            this.width = field.getWidth();
+            this.gridStepX = field.getGridStepX();
+            this.gridStepY = field.getGridStepY();
+            this.fieldSquares = field.getFieldSquares();
+            return this;
+        }
+
         @JsonProperty(value = "length")
         public Builder setLength(int length) {
             this.length = length;

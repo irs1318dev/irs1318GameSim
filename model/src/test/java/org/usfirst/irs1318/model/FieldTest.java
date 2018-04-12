@@ -23,5 +23,8 @@ public class FieldTest {
         Field fieldValue = objectMapper.readValue(value, Field.class);
         System.out.println(fieldValue.toString());
         assertEquals(field, fieldValue);
+
+        Field copyField = new Field.Builder().copyOf(field).build();
+        assertEquals(field, copyField);
     }
 }

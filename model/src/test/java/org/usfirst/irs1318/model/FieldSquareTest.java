@@ -22,5 +22,9 @@ public class FieldSquareTest {
         FieldSquare fieldSquareValue = objectMapper.readValue(value, FieldSquare.class);
         System.out.println(fieldSquareValue.toString());
         assertEquals(fieldSquare, fieldSquareValue);
+
+        FieldSquare copyFieldSquare = new FieldSquare.Builder().copyOf(fieldSquare).build();
+        assertEquals(fieldSquare, copyFieldSquare);
+
     }
 }

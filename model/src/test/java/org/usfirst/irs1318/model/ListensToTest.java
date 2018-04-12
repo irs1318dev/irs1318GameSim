@@ -59,6 +59,10 @@ public class ListensToTest {
         ListensTo listensToValue = objectMapper.readValue(value, ListensTo.class);
         System.out.println(listensToValue.toString());
         assertEquals(listensTo, listensToValue);
+
+        ListensTo copyListensTo = new ListensTo.Builder().copyOf(listensTo).build();
+        assertEquals(listensTo, copyListensTo);
+
     }
 
 }
