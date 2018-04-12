@@ -70,6 +70,15 @@ public class TaskDetail {
         private int reactionTime;
         private double reliability;
         private Task task;
+
+        public Builder copyOf(TaskDetail taskDetail){
+            this.duration = taskDetail.getDuration();
+            this.reactionTime = taskDetail.getReactionTime();
+            this.reliability = taskDetail.getReliability();
+            this.task = taskDetail.getTask();
+            return this;
+        }
+
         @JsonProperty(value = "duration")
         public Builder setDuration(int duration) {
             this.duration = duration;

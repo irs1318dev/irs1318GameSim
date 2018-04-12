@@ -22,5 +22,9 @@ public class GameTermTest {
         GameTerm gameTermValue = objectMapper.readValue(value, GameTerm.class);
         System.out.println(gameTermValue.toString());
         assertEquals(gameTerm, gameTermValue);
+
+        GameTerm copyGameTerm = new GameTerm.Builder().copyOf(gameTerm).build();
+        assertEquals(gameTerm, copyGameTerm);
+
     }
 }

@@ -39,6 +39,10 @@ public class FieldActorTest {
         FieldActor fieldActorValue = objectMapper.readValue(value, FieldActor.class);
         System.out.println(fieldActorValue.toString());
         assertEquals(fieldActor, fieldActorValue);
+
+        FieldActor copyFieldActor = new FieldActor.Builder().copyOf(fieldActor).build();
+        assertEquals(fieldActor, copyFieldActor);
+
     }
 
 }

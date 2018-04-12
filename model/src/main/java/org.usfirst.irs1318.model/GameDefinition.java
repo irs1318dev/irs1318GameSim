@@ -101,6 +101,16 @@ public class GameDefinition {
         private Map<String, Actor> playBook = new HashMap<>();;
         private Set<GameTerm> gameTerms = new HashSet<>();;
 
+        public Builder copyOf(GameDefinition gameDefinition){
+            this.foulTrackers = gameDefinition.getFoulTrackers();
+            this.gameTerms = gameDefinition.getGameTerms();
+            this.personTasks = gameDefinition.getPersonTasks();
+            this.playBook = gameDefinition.getPlayBook();
+            this.robotTasks = gameDefinition.getRobotTasks();
+            this.scoreKeepers = gameDefinition.getScoreKeepers();
+            return this;
+        }
+
         @JsonProperty(value = "personTasks")
         public Builder setPersonTasks(Map<String, Task> personTasks) {
             this.personTasks = personTasks;

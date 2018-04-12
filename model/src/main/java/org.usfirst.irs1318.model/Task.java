@@ -106,6 +106,17 @@ public class Task {
         private String direction;
         private String actor;
 
+        public Builder copyOf(Task task){
+            this.name = task.getName();
+            this.id = task.getId();
+            this.activity = task.getActivity();
+            this.object = task.getObject();
+            this.targetType = task.getTargetType();
+            this.direction = task.getDirection();
+            this.actor = task.getActor();
+            return this;
+        }
+
         @JsonProperty(value = "name")
         public Builder setName(String name) {
             this.name = name;

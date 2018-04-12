@@ -54,6 +54,12 @@ public class FieldSquare {
         private int x;
         private int y;
 
+        public Builder copyOf(FieldSquare fieldSquare){
+            this.x = fieldSquare.getX();
+            this.y = fieldSquare.getY();
+            return this;
+        }
+
         @JsonProperty(value = "x")
         public Builder setX(int x) {
             this.x = x;

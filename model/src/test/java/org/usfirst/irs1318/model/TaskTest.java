@@ -50,6 +50,10 @@ public class TaskTest {
         Task taskValue = objectMapper.readValue(value, Task.class);
         System.out.println(taskValue.toString());
         assertEquals(task, taskValue);
+
+        Task copyTask = new Task.Builder().copyOf(task).build();
+        assertEquals(task, copyTask);
+
     }
 
 }

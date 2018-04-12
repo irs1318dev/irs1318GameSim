@@ -42,5 +42,9 @@ public class TaskDetailTest {
         TaskDetail taskDetailValue = objectMapper.readValue(value, TaskDetail.class);
         System.out.println(taskDetailValue.toString());
         assertEquals(taskDetail, taskDetailValue);
+
+        TaskDetail copyTaskDetail = new TaskDetail.Builder().copyOf(taskDetail).build();
+        assertEquals(taskDetail, copyTaskDetail);
+
     }
 }

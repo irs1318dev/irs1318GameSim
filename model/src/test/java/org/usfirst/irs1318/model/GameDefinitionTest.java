@@ -90,6 +90,10 @@ public class GameDefinitionTest {
         GameDefinition gameDefinitionValue = objectMapper.readValue(value, GameDefinition.class);
         System.out.println(gameDefinitionValue.toString());
         assertEquals(gameDefinition, gameDefinitionValue);
+
+        GameDefinition copyGameDefinition = new GameDefinition.Builder().copyOf(gameDefinition).build();
+        assertEquals(gameDefinition, copyGameDefinition);
+
     }
 
 }

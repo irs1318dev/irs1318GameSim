@@ -64,6 +64,13 @@ public class FieldActor {
         private String id;
         private String type;
 
+        public Builder copyOf(FieldActor fieldActor){
+            this.name = fieldActor.getName();
+            this.id = fieldActor.getId();
+            this.type = fieldActor.getType();
+            return this;
+        }
+
         @JsonProperty(value = "name")
         public Builder setName(String name) {
             this.name = name;

@@ -182,6 +182,7 @@ public final class FieldTest {
         Assert.assertEquals("teleop", getEventName(log, 2));
         Assert.assertEquals("endGame", getEventName(log, 3));
         Assert.assertEquals("post", getEventName(log, 4));
+
     }
 
     private String getEventName(Stream<Tuple2<Event, GameState>> log, int i) {

@@ -55,6 +55,12 @@ public class ListensTo {
         private String actorName;
         private List<EmittedEvent> emittedEvents = new ArrayList<>();
 
+        public Builder copyOf(ListensTo listensTo){
+            this.emittedEvents = listensTo.getEmittedEvents();
+            this.actorName = listensTo.getActorName();
+            return this;
+        }
+
         @JsonProperty(value = "actorName")
         public Builder setActorName(String actorName){
             this.actorName = actorName;

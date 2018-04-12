@@ -6,10 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @JsonDeserialize(builder = GameTerm.Builder.class)
 public class GameTerm {
@@ -48,6 +46,16 @@ public class GameTerm {
     @JsonPOJOBuilder
     public static class Builder {
         private Map<String, Set<String>> definitions = new HashMap<>();
+
+        public Builder copyOf (GameTerm gameTerm){
+            gameTerm.getDefinitions().keySet()
+                    .forEach(key ->
+                            definitions.put(key,
+                                    new HashSet<String>(gameTerm.getDefinitions().get(key))
+                            )
+                    );
+                    return this;
+        }
 
         @JsonProperty(value = "definitions")
         public Builder setDefinitions(Map<String, Set<String>> definitions) {
